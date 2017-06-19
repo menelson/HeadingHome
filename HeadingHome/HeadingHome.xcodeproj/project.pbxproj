@@ -14,6 +14,7 @@
 		27A204BB1EF7FB1C00BE4846 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27A204B91EF7FB1C00BE4846 /* Model.xcdatamodeld */; };
 		27A204BE1EF7FC1C00BE4846 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A204BD1EF7FC1C00BE4846 /* MessageController.swift */; };
 		27A204C01EF7FD3700BE4846 /* MessageControllerUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A204BF1EF7FD3700BE4846 /* MessageControllerUnitTests.swift */; };
+		27A204C21EF8177400BE4846 /* MainMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A204C11EF8177400BE4846 /* MainMessageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		27A204BA1EF7FB1C00BE4846 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		27A204BD1EF7FC1C00BE4846 /* MessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		27A204BF1EF7FD3700BE4846 /* MessageControllerUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageControllerUnitTests.swift; sourceTree = "<group>"; };
+		27A204C11EF8177400BE4846 /* MainMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMessageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				27A204BD1EF7FC1C00BE4846 /* MessageController.swift */,
+				27A204C11EF8177400BE4846 /* MainMessageViewController.swift */,
 			);
 			name = MessageAction;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				27A2049A1EF7F40F00BE4846 /* AppDelegate.swift in Sources */,
 				27A204BE1EF7FC1C00BE4846 /* MessageController.swift in Sources */,
 				27A204BB1EF7FB1C00BE4846 /* Model.xcdatamodeld in Sources */,
+				27A204C21EF8177400BE4846 /* MainMessageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

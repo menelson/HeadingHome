@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="-422" y="22"/>
         </scene>
-        <!--View Controller-->
+        <!--Main Message View Controller-->
         <scene sceneID="UuJ-Eu-3HT">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="lmu-j9-gwD" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="lmu-j9-gwD" customClass="MainMessageViewController" customModule="HeadingHome" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rfr-QT-45B"/>
                         <viewControllerLayoutGuide type="bottom" id="0qB-9z-NRM"/>
@@ -89,9 +89,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="w8V-HE-viv">
-                        <barButtonItem key="leftBarButtonItem" image="ic_menu" id="cBg-9o-f9P"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gpv-hl-0Lg"/>
+                        <barButtonItem key="leftBarButtonItem" image="ic_menu" id="cBg-9o-f9P">
+                            <connections>
+                                <action selector="didTapMenu:" destination="lmu-j9-gwD" id="NbH-ZP-Mbh"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gpv-hl-0Lg">
+                            <connections>
+                                <action selector="didTapAdd:" destination="lmu-j9-gwD" id="h2f-Tl-2RA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="wSf-0R-oF8" id="Ge0-oL-18l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4k0-tY-MUE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
