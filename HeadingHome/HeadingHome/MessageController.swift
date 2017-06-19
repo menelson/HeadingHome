@@ -56,4 +56,28 @@ class MessageController {
         return message
     }
     
+    func updateMessage(message: Message) -> Bool {
+        let saved = save()
+        
+        if !saved {
+            print("Message not updated")
+            return false
+        }
+        return true
+    }
+    
+    func deleteMessage(message: Message) -> Bool {
+        
+        context?.delete(message)
+        
+        let saved = save()
+        
+        if !saved {
+            print("Message not deleted")
+            return false
+        }
+        return true
+        
+    }
+    
 }

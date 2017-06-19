@@ -13,9 +13,13 @@ import CoreData
 
 class MessageControllerUnitTests: XCTestCase {
     
+    var controller: MessageController?
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        controller = MessageController()
+        controller?.context = setUpInMemoryCoreDateContext()
     }
     
     override func tearDown() {
@@ -44,28 +48,51 @@ class MessageControllerUnitTests: XCTestCase {
     
     func testControllerInit() {
         // Given
-        let controller: MessageController?
+        let testController: MessageController?
         
         // When
-        controller = MessageController()
+        testController = MessageController()
         
         // Then
-        XCTAssertNotNil(controller)
-        XCTAssertNotNil(controller?.context!)
+        XCTAssertNotNil(testController)
+        XCTAssertNotNil(testController?.context!)
     }
     
     func testControllerCreate() {
         // Given
-        let controller = MessageController()
-        controller.context = setUpInMemoryCoreDateContext()
         let title = "Test Title"
         let body = "Test Message"
         
         // When
-        let message = controller.createMessage(title: title, withBody: body)
+        let message = controller?.createMessage(title: title, withBody: body)
         
         // Then
-        XCTAssertTrue(message.title == title)
-        XCTAssertTrue(message.body == body)
+        XCTAssertTrue(message?.title == title)
+        XCTAssertTrue(message?.body == body)
+    }
+    
+    func testControllerUpdate() {
+        // Given
+        let newTitle = "New Title"
+        let message = controller?.createMessage(title: "Test", withBody: "Body")
+        
+        // When
+        message?.title = newTitle
+        let updated = controller?.updateMessage(message: message!)
+        
+        // Then
+        XCTAssertTrue(updated!)
+        XCTAssertTrue(newTitle == message?.title)
+    }
+    
+    func testControllerDelete() {
+        // Given
+        let message = controller?.createMessage(title: "Test", withBody: "Body")
+        
+        // When
+        let deleted = controller?.deleteMessage(message: message!)
+        
+        // Then
+        XCTAssertTrue(deleted!)
     }
 }
