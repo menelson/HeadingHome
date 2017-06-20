@@ -17,6 +17,12 @@ class MainMessageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        
+        initializeFetchedResultsController()
+        fetchedResultsController?.delegate = self
 
     }
 
@@ -28,6 +34,31 @@ class MainMessageViewController: UIViewController {
 
     @IBAction func didTapAdd(_ sender: Any) {
         
+        let addAlert = UIAlertController(title: "Add", message: "New Message", preferredStyle: .alert)
+        
+        addAlert.addTextField { (textField) in
+            textField.placeholder = "Title"
+        }
+        
+        addAlert.addTextField { (textField) in
+            textField.placeholder = "Body"
+        }
+        
+        let ok = UIAlertAction(title: "Ok", style: .default) { (_) in
+            if let title = addAlert.textFields?[0].text,
+                let body = addAlert.textFields?[1].text {
+                print("\(title) ## \(body)")
+                _ = MessageController().createMessage(title: title, withBody: body)
+            }
+            
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        addAlert.addAction(ok)
+        addAlert.addAction(cancel)
+        
+        self.present(addAlert, animated: true, completion: nil)
     }
     
     @IBAction func didTapMenu(_ sender: Any) {
@@ -42,7 +73,10 @@ class MainMessageViewController: UIViewController {
         request.sortDescriptors = [nameSort]
         
         let moc = MessageController().context
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc!, sectionNameKeyPath: "title", cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
+                                                              managedObjectContext: moc!,
+                                                              sectionNameKeyPath: nil,
+                                                              cacheName: nil)
         
         self.fetchedResultsController?.delegate = self
         
@@ -60,7 +94,8 @@ extension MainMessageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let sections = self.fetchedResultsController?.sections else {
-            fatalError("No sections")
+            print("No sections")
+            return 0
         }
         
         let sectionInfo = sections[section]
@@ -69,7 +104,7 @@ extension MainMessageViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return (self.fetchedResultsController?.sections?.count)!
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
