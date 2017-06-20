@@ -22,8 +22,6 @@ class MainMessageViewController: UIViewController {
         tableView?.dataSource = self
         
         initializeFetchedResultsController()
-        fetchedResultsController?.delegate = self
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +46,7 @@ class MainMessageViewController: UIViewController {
             if let title = addAlert.textFields?[0].text,
                 let body = addAlert.textFields?[1].text {
                 print("\(title) ## \(body)")
-                _ = MessageController().createMessage(title: title, withBody: body)
+                _ = MessageController.sharedInstance.createMessage(title: title, withBody: body)
             }
             
         }
@@ -72,7 +70,7 @@ class MainMessageViewController: UIViewController {
         
         request.sortDescriptors = [nameSort]
         
-        let moc = MessageController().context
+        let moc = MessageController.sharedInstance.context
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
                                                               managedObjectContext: moc!,
                                                               sectionNameKeyPath: nil,
@@ -133,7 +131,7 @@ extension MainMessageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if let message = fetchedResultsController?.object(at: indexPath) as? Message {
-                _ = MessageController().deleteMessage(message: message)
+                _ = MessageController.sharedInstance.deleteMessage(message: message)
             }
         }
     }

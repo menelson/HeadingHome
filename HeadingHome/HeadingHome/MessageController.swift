@@ -14,7 +14,9 @@ class MessageController {
     var context: NSManagedObjectContext?
     let persistentContainer: NSPersistentContainer
     
-    init() {
+    static let sharedInstance = MessageController()
+    
+    fileprivate init() {
         persistentContainer = NSPersistentContainer(name: "Model")
         
         persistentContainer.loadPersistentStores() {
