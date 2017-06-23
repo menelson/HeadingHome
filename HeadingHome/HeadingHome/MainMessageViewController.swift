@@ -28,37 +28,7 @@ class MainMessageViewController: UIViewController {
         super.didReceiveMemoryWarning()
         
     }
-    
-
-    @IBAction func didTapAdd(_ sender: Any) {
         
-        let addAlert = UIAlertController(title: "Add", message: "New Message", preferredStyle: .alert)
-        
-        addAlert.addTextField { (textField) in
-            textField.placeholder = "Title"
-        }
-        
-        addAlert.addTextField { (textField) in
-            textField.placeholder = "Body"
-        }
-        
-        let ok = UIAlertAction(title: "Ok", style: .default) { (_) in
-            if let title = addAlert.textFields?[0].text,
-                let body = addAlert.textFields?[1].text {
-                print("\(title) ## \(body)")
-                _ = MessageController.sharedInstance.createMessage(title: title, withBody: body)
-            }
-            
-        }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        addAlert.addAction(ok)
-        addAlert.addAction(cancel)
-        
-        self.present(addAlert, animated: true, completion: nil)
-    }
-    
     @IBAction func didTapMenu(_ sender: Any) {
         
     }
