@@ -54,10 +54,20 @@ class MainMessageViewController: UIViewController {
             fatalError("Failed to initialize FetchedResultsController: \(error)")
         }
     }
+    
+    func didTapSend(_ sender: Any) {
+        print("send")
+    }
+    
+    func didTapDetail(_ sender: Any) {
+        print("detail")
+    }
 }
 
 class ActionCell: UITableViewCell {
     @IBOutlet weak var title: UILabel?
+    @IBOutlet weak var sendButton: UIButton?
+    @IBOutlet weak var detailButton: UIButton?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -100,7 +110,11 @@ extension MainMessageViewController: UITableViewDataSource {
         
         cell.title?.text = message.title
         
-        //TODO:- Add buttons
+        cell.sendButton?.tag = indexPath.row
+        cell.sendButton?.addTarget(self, action: #selector(didTapSend(_:)), for: .touchUpInside)
+        
+        cell.detailButton?.tag = indexPath.row
+        cell.detailButton?.addTarget(self, action: #selector(didTapDetail(_:)), for: .touchUpInside)
         
         return cell
     }
