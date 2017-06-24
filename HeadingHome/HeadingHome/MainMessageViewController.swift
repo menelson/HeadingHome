@@ -28,6 +28,16 @@ class MainMessageViewController: UIViewController {
         super.didReceiveMemoryWarning()
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let idx = NSIndexPath(row: (sender as AnyObject).tag, section: 0)
+        let message = fetchedResultsController?.object(at: idx as IndexPath) as! Message
+        
+        if segue.identifier == "MessageDetailSegue" {
+            let dest = segue.destination as? MessageDetailViewController
+            dest?.message = message
+        }
+    }
         
     @IBAction func didTapMenu(_ sender: Any) {
         
@@ -60,9 +70,11 @@ class MainMessageViewController: UIViewController {
     }
     
     func didTapDetail(_ sender: Any) {
-        print("detail")
+        performSegue(withIdentifier: "MessageDetailSegue", sender: sender)
     }
 }
+
+//MARK:- ActionCell
 
 class ActionCell: UITableViewCell {
     @IBOutlet weak var title: UILabel?
@@ -74,6 +86,8 @@ class ActionCell: UITableViewCell {
     }
 }
 
+
+//MARK:- TableviewDataSource
 
 extension MainMessageViewController: UITableViewDataSource {
     
@@ -121,6 +135,9 @@ extension MainMessageViewController: UITableViewDataSource {
     
 }
 
+
+//MARK:- Tableview Delegate
+
 extension MainMessageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -135,6 +152,8 @@ extension MainMessageViewController: UITableViewDelegate {
     }
     
 }
+
+//MARK:- FetchedResultsController Delegate
 
 extension MainMessageViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
