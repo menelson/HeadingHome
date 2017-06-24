@@ -56,6 +56,14 @@ class MainMessageViewController: UIViewController {
     }
 }
 
+class ActionCell: UITableViewCell {
+    @IBOutlet weak var title: UILabel?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+}
+
 
 extension MainMessageViewController: UITableViewDataSource {
     
@@ -86,11 +94,13 @@ extension MainMessageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "ActionCell")!
+        let cell: ActionCell = tableView.dequeueReusableCell(withIdentifier: "ActionCell")! as! ActionCell
         
         let message = fetchedResultsController?.object(at: indexPath) as! Message
         
-        cell.textLabel?.text = message.title
+        cell.title?.text = message.title
+        
+        //TODO:- Add buttons
         
         return cell
     }

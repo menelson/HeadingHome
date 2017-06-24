@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +15,7 @@
         <!--Navigation Controller-->
         <scene sceneID="ze5-gl-3Wk">
             <objects>
-                <navigationController storyboardIdentifier="MainNavController" id="LQF-Yb-tBU" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="MainNavController" storyboardIdentifier="MainNavController" id="LQF-Yb-tBU" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vqD-td-FCz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -42,22 +44,50 @@
                                 <rect key="frame" x="0.0" y="336" width="375" height="311"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActionCell" textLabel="vi3-WE-N9o" style="IBUITableViewCellStyleDefault" id="qgE-OQ-uaB">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActionCell" id="qgE-OQ-uaB" customClass="ActionCell" customModule="HeadingHome" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qgE-OQ-uaB" id="XJA-N2-1OP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Heading home action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vi3-WE-N9o">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0o1-6U-Lth">
+                                                    <rect key="frame" x="8" y="11" width="267" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="267" id="OXl-T8-QTg"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4T6-3c-k9j">
+                                                    <rect key="frame" x="337" y="11" width="22" height="22"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7op-q3-SWV">
+                                                    <rect key="frame" x="283" y="11" width="46" height="22"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="Send">
+                                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0o1-6U-Lth" firstAttribute="leading" secondItem="XJA-N2-1OP" secondAttribute="leadingMargin" id="0l6-MN-YsA"/>
+                                                <constraint firstItem="7op-q3-SWV" firstAttribute="leading" secondItem="0o1-6U-Lth" secondAttribute="trailing" constant="8" symbolic="YES" id="6yg-pD-EHd"/>
+                                                <constraint firstItem="7op-q3-SWV" firstAttribute="centerY" secondItem="XJA-N2-1OP" secondAttribute="centerY" id="Fam-Sz-eo8"/>
+                                                <constraint firstItem="4T6-3c-k9j" firstAttribute="leading" secondItem="7op-q3-SWV" secondAttribute="trailing" constant="8" id="NV6-qI-SQP"/>
+                                                <constraint firstItem="4T6-3c-k9j" firstAttribute="leading" secondItem="7op-q3-SWV" secondAttribute="trailing" constant="8" id="Ofw-uD-Tmv"/>
+                                                <constraint firstItem="0o1-6U-Lth" firstAttribute="baseline" secondItem="7op-q3-SWV" secondAttribute="baseline" id="TqN-62-LjS"/>
+                                                <constraint firstItem="0o1-6U-Lth" firstAttribute="baseline" secondItem="7op-q3-SWV" secondAttribute="firstBaseline" id="UuV-rm-x4K"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="4T6-3c-k9j" secondAttribute="trailing" constant="8" id="mzx-MN-mDP"/>
+                                                <constraint firstItem="0o1-6U-Lth" firstAttribute="centerY" secondItem="7op-q3-SWV" secondAttribute="centerY" id="q87-oh-idQ"/>
+                                                <constraint firstItem="4T6-3c-k9j" firstAttribute="centerY" secondItem="XJA-N2-1OP" secondAttribute="centerY" id="qKf-qu-Zyk"/>
+                                                <constraint firstItem="0o1-6U-Lth" firstAttribute="top" secondItem="7op-q3-SWV" secondAttribute="top" id="tbs-Kh-EZJ"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="title" destination="0o1-6U-Lth" id="V3y-uG-7L7"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
