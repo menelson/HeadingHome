@@ -124,7 +124,6 @@
                     <navigationItem key="navigationItem" id="w8V-HE-viv">
                         <barButtonItem key="leftBarButtonItem" image="ic_menu" id="cBg-9o-f9P">
                             <connections>
-                                <action selector="didTapMenu:" destination="lmu-j9-gwD" id="NbH-ZP-Mbh"/>
                                 <segue destination="d9u-fx-6a9" kind="popoverPresentation" identifier="SettingsSegue" popoverAnchorBarButtonItem="cBg-9o-f9P" id="uYl-tS-SKa">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
@@ -132,7 +131,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gpv-hl-0Lg">
                             <connections>
-                                <segue destination="XwW-C1-ooC" kind="popoverPresentation" popoverAnchorBarButtonItem="Gpv-hl-0Lg" id="HZA-wv-7tt">
+                                <segue destination="XwW-C1-ooC" kind="popoverPresentation" identifier="NewMessageSegue" popoverAnchorBarButtonItem="Gpv-hl-0Lg" id="HZA-wv-7tt">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>

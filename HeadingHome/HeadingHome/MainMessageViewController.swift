@@ -30,7 +30,8 @@ class MainMessageViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(!(segue.identifier == "SettingsSegue")) {
+        
+        if(!(segue.identifier == "SettingsSegue" || segue.identifier == "NewMessageSegue")) {
             let idx = NSIndexPath(row: (sender as AnyObject).tag, section: 0)
             let message = fetchedResultsController?.object(at: idx as IndexPath) as! Message
             
@@ -39,10 +40,6 @@ class MainMessageViewController: UIViewController {
                 dest?.message = message
             }
         }
-    }
-        
-    @IBAction func didTapMenu(_ sender: Any) {
-        
     }
     
     func initializeFetchedResultsController() {
