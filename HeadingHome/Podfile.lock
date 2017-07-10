@@ -1,0 +1,21 @@
+PODS:
+  - MNPermissionService (0.0.1)
+
+DEPENDENCIES:
+  - MNPermissionService (from `https://github.com/menelson/MNPermissionService`)
+
+EXTERNAL SOURCES:
+  MNPermissionService:
+    :git: https://github.com/menelson/MNPermissionService
+
+CHECKOUT OPTIONS:
+  MNPermissionService:
+    :commit: 624dd4e97947dcd1a33754d86a4022a627b60aa8
+    :git: https://github.com/menelson/MNPermissionService
+
+SPEC CHECKSUMS:
+  MNPermissionService: b9568925c9a1ae0bf71c240245b0a150293ad4d3
+
+PODFILE CHECKSUM: e0cc5b55e5c9f7822f68afb5e69d2105e84a5661
+
+COCOAPODS: 1.1.1

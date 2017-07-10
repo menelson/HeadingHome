@@ -1,0 +1,19 @@
+{
+  "name": "MNPermissionService",
+  "version": "0.0.1",
+  "summary": "MNPermissionService provides a quick unified interface for requesting User permissions to common iOS resources.",
+  "description": "MNPermissionService provides a quick unified interface for requesting User permissions to common iOS resources. It is written to allow quick prompting of the user without having to re-write permission checking details.",
+  "homepage": "https://github.com/menelson/MNPermissionService",
+  "license": "BSD-3",
+  "authors": {
+    "Mike Nelson": "codesthensurfs@gmail.com"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source": {
+    "git": "https://github.com/menelson/MNPermissionService.git",
+    "tag": "0.0.1"
+  },
+  "source_files": "MNPermissionService/MNPermissionService/**/*.{swift}"
+}
