@@ -20,6 +20,7 @@
 		27A204C81F00432300BE4846 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A204C71F00432300BE4846 /* SettingsViewController.swift */; };
 		27A204CA1F017BC800BE4846 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A204C91F017BC800BE4846 /* ContactService.swift */; };
 		27A204CD1F017E3D00BE4846 /* ContactServiceUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A204CC1F017E3D00BE4846 /* ContactServiceUnitTests.swift */; };
+		27AFC86D1F13C3F00069C1CA /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFC86C1F13C3F00069C1CA /* Helper.swift */; };
 		502424C70B6F2FAE5127F07C /* Pods_HeadingHomeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87578A5915C7252521E8A73 /* Pods_HeadingHomeTests.framework */; };
 		CA9CED88FFADED39B6C7828C /* Pods_HeadingHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEB45E9F81CB22F82FE53F4 /* Pods_HeadingHome.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		27A204C71F00432300BE4846 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		27A204C91F017BC800BE4846 /* ContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		27A204CC1F017E3D00BE4846 /* ContactServiceUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactServiceUnitTests.swift; sourceTree = "<group>"; };
+		27AFC86C1F13C3F00069C1CA /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		81D41780B04D3D6D01D4462F /* Pods-HeadingHomeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeadingHomeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HeadingHomeTests/Pods-HeadingHomeTests.release.xcconfig"; sourceTree = "<group>"; };
 		845893F8B50F4B454BA55C02 /* Pods-HeadingHomeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeadingHomeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HeadingHomeTests/Pods-HeadingHomeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		99378523537C35C72F380454 /* Pods-HeadingHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeadingHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HeadingHome/Pods-HeadingHome.debug.xcconfig"; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 		27AFC86B1F13AF570069C1CA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				27AFC86C1F13C3F00069C1CA /* Helper.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				27A204CA1F017BC800BE4846 /* ContactService.swift in Sources */,
 				27A204BB1EF7FB1C00BE4846 /* Model.xcdatamodeld in Sources */,
 				27A204C21EF8177400BE4846 /* MainMessageViewController.swift in Sources */,
+				27AFC86D1F13C3F00069C1CA /* Helper.swift in Sources */,
 				27A204C61EFED6FA00BE4846 /* MessageDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,12 +28,9 @@ public class ContactService: NSObject, CNContactPickerDelegate {
         picker.delegate = self
         picker.displayedPropertyKeys = [CNContactPhoneNumbersKey]
         
-        if var currentViewController = UIApplication.shared.keyWindow?.rootViewController {
-            while let presentedViewController = currentViewController.presentedViewController {
-                currentViewController = presentedViewController
-            }
-            currentViewController.present(picker, animated: true, completion: nil)
-        }
+        let current = Helper.sharedInstance.getCurrentViewController()
+        
+        current.present(picker, animated: true, completion: nil)
     }
     
     // MARK: - ContactPicker Delegates
