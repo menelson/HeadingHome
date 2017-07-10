@@ -1,0 +1,6 @@
+framework module MNPermissionService {
+  umbrella header "MNPermissionService-umbrella.h"
+
+  export *
+  module * { export * }
+}

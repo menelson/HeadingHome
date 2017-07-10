@@ -10,73 +10,49 @@ import Foundation
 import Contacts
 import ContactsUI
 import UIKit
+import MNPermissionService
 
-public class ContactService {
+public class ContactService: NSObject, CNContactPickerDelegate {
     
     let contactStore: CNContactStore = CNContactStore()
+    let permissionSVC: MNPermissionService?
+    lazy var status = CNContactStore.authorizationStatus(for: .contacts)
     
-    
-    init() {
-        checkPermissions()
+    override init() {
+        permissionSVC = MNPermissionService.create(service: .contact)
+        permissionSVC?.requestAccess(service: .contact)
     }
     
-    func checkPermissions() {
-        let status = CNContactStore.authorizationStatus(for: .contacts)
+    func showContactPicker() {
+        let picker = CNContactPickerViewController()
+        picker.delegate = self
+        picker.displayedPropertyKeys = [CNContactPhoneNumbersKey]
         
-        switch status {
-        case .notDetermined:
-            requestAccess()
-            break
-        case .denied, .restricted:
-            promptAndInformUser()
-            break
-        case .authorized:
-            // Do things
-            break
-        }
+        let current = Helper.sharedInstance.getCurrentViewController()
+        
+        current.present(picker, animated: true, completion: nil)
     }
     
-    func requestAccess() {
-        contactStore.requestAccess(for: .contacts) {
-            (granted, error) in
-            
-            if error != nil {
-                print("Error requesting access")
-            }
-            
-            if granted {
-                // Do things
-            } else {
-                self.promptAndInformUser()
-            }
-        }
+    func saveContactDefaults(name: String, number: String) {
+        AppDefaults.sharedInstance.setString(item: name, key: appKeys.contactName.rawValue)
+        AppDefaults.sharedInstance.setString(item: number, key: appKeys.contactNumber.rawValue)
     }
     
-    func promptAndInformUser() {
-        let message = "Conatacts are used to provide a default person to send messages. Without Access to Contacts, some features of the app will not work correctly."
+    func getContactDefaults() -> (String, String) {
+        let name = AppDefaults.sharedInstance.getString(key: appKeys.contactName.rawValue)
+        let number = AppDefaults.sharedInstance.getString(key: appKeys.contactNumber.rawValue)
         
-        let dialog = UIAlertController(title: "Contact Permission", message: message, preferredStyle: .alert)
-        
-        let settingsAction = UIAlertAction(title: "Settings", style: .default, handler: {
-            action in
-            
-            let settingsURL = URL(string: UIApplicationOpenSettingsURLString)
-            UIApplication.shared.open(settingsURL!, options: [:], completionHandler: nil)
-            
-        })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        dialog.addAction(settingsAction)
-        dialog.addAction(cancelAction)
-        
-        if var currentViewController = UIApplication.shared.keyWindow?.rootViewController {
-            while let presentedViewController = currentViewController.presentedViewController {
-                currentViewController = presentedViewController
-            }
-            
-            currentViewController.present(dialog, animated: true, completion: nil)
-        }
+        return (name, number)
     }
     
+    // MARK: - ContactPicker Delegates
+    
+    public func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty: CNContactProperty) {
+        
+        let contact = contactProperty.contact
+        let phoneNumber = contactProperty.value as? CNPhoneNumber
+        
+        saveContactDefaults(name: contact.givenName, number: (phoneNumber?.stringValue)!)
+    }
+        
 }
