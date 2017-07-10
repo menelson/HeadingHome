@@ -30,12 +30,14 @@ class MainMessageViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let idx = NSIndexPath(row: (sender as AnyObject).tag, section: 0)
-        let message = fetchedResultsController?.object(at: idx as IndexPath) as! Message
-        
-        if segue.identifier == "MessageDetailSegue" {
-            let dest = segue.destination as? MessageDetailViewController
-            dest?.message = message
+        if(!(segue.identifier == "SettingsSegue")) {
+            let idx = NSIndexPath(row: (sender as AnyObject).tag, section: 0)
+            let message = fetchedResultsController?.object(at: idx as IndexPath) as! Message
+            
+            if segue.identifier == "MessageDetailSegue" {
+                let dest = segue.destination as? MessageDetailViewController
+                dest?.message = message
+            }
         }
     }
         

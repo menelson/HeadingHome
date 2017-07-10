@@ -48,7 +48,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qgE-OQ-uaB" id="XJA-N2-1OP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0o1-6U-Lth">
@@ -125,7 +125,7 @@
                         <barButtonItem key="leftBarButtonItem" image="ic_menu" id="cBg-9o-f9P">
                             <connections>
                                 <action selector="didTapMenu:" destination="lmu-j9-gwD" id="NbH-ZP-Mbh"/>
-                                <segue destination="d9u-fx-6a9" kind="popoverPresentation" popoverAnchorBarButtonItem="cBg-9o-f9P" id="uYl-tS-SKa">
+                                <segue destination="d9u-fx-6a9" kind="popoverPresentation" identifier="SettingsSegue" popoverAnchorBarButtonItem="cBg-9o-f9P" id="uYl-tS-SKa">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -150,7 +150,6 @@
         <!--Settings View Controller-->
         <scene sceneID="at9-wL-Bfy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vHs-d8-TJi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="d9u-fx-6a9" customClass="SettingsViewController" customModule="HeadingHome" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tBT-qh-PDM"/>
@@ -193,7 +192,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsCell" textLabel="vi2-Kp-gcP" style="IBUITableViewCellStyleDefault" id="aM7-O2-dcM">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aM7-O2-dcM" id="OKj-kB-B4v">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
@@ -234,6 +233,7 @@
                         <outlet property="tableView" destination="ykn-eS-m4f" id="T7k-Ai-cyU"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vHs-d8-TJi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="476" y="-905.3973013493254"/>
         </scene>
