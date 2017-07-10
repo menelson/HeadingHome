@@ -8,10 +8,12 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 class MainMessageViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var mapView: MKMapView?
     
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
@@ -22,13 +24,9 @@ class MainMessageViewController: UIViewController {
         tableView?.dataSource = self
         
         initializeFetchedResultsController()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
         
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if(!(segue.identifier == "SettingsSegue" || segue.identifier == "NewMessageSegue")) {
@@ -71,6 +69,7 @@ class MainMessageViewController: UIViewController {
     func didTapDetail(_ sender: Any) {
         performSegue(withIdentifier: "MessageDetailSegue", sender: sender)
     }
+    
 }
 
 //MARK:- ActionCell
