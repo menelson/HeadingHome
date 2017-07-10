@@ -23,6 +23,12 @@ class SettingsViewController: UIViewController {
         
         contactService = ContactService()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        tableView?.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
