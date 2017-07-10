@@ -64,6 +64,13 @@ extension SettingsViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             if !(CNContactStore.authorizationStatus(for: .contacts) == .authorized) {
                 cell.textLabel?.text = "Not Authorized"
+            } else {
+                let contact = contactService?.getContactDefaults()
+                if contact?.0 == "" {
+                    cell.textLabel?.text = "Not Set"
+                } else {
+                    cell.textLabel?.text = contact?.0
+                }
             }
             
         } else {

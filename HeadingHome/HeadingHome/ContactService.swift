@@ -33,6 +33,18 @@ public class ContactService: NSObject, CNContactPickerDelegate {
         current.present(picker, animated: true, completion: nil)
     }
     
+    func saveContactDefaults(name: String, number: String) {
+        AppDefaults.sharedInstance.setString(item: name, key: appKeys.contactName.rawValue)
+        AppDefaults.sharedInstance.setString(item: number, key: appKeys.contactNumber.rawValue)
+    }
+    
+    func getContactDefaults() -> (String, String) {
+        let name = AppDefaults.sharedInstance.getString(key: appKeys.contactName.rawValue)
+        let number = AppDefaults.sharedInstance.getString(key: appKeys.contactNumber.rawValue)
+        
+        return (name, number)
+    }
+    
     // MARK: - ContactPicker Delegates
     
     public func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty: CNContactProperty) {
@@ -40,7 +52,7 @@ public class ContactService: NSObject, CNContactPickerDelegate {
         let contact = contactProperty.contact
         let phoneNumber = contactProperty.value as? CNPhoneNumber
         
-        print("\(contact.givenName) - \(phoneNumber?.stringValue ?? "Empty")")
+        saveContactDefaults(name: contact.givenName, number: (phoneNumber?.stringValue)!)
     }
         
 }
