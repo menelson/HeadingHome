@@ -103,6 +103,8 @@
 		27A204981EF7F40F00BE4846 /* HeadingHome */ = {
 			isa = PBXGroup;
 			children = (
+				27AFC86B1F13AF570069C1CA /* Shared */,
+				27AFC86A1F13AF490069C1CA /* Settings */,
 				27A204CB1F017BCF00BE4846 /* Contact */,
 				27A204BC1EF7FBFC00BE4846 /* MessageAction */,
 				27A204991EF7F40F00BE4846 /* AppDelegate.swift */,
@@ -111,7 +113,6 @@
 				27A204A21EF7F40F00BE4846 /* LaunchScreen.storyboard */,
 				27A204A51EF7F40F00BE4846 /* Info.plist */,
 				27A204B91EF7FB1C00BE4846 /* Model.xcdatamodeld */,
-				27A204C71F00432300BE4846 /* SettingsViewController.swift */,
 			);
 			path = HeadingHome;
 			sourceTree = "<group>";
@@ -143,6 +144,21 @@
 				27A204C91F017BC800BE4846 /* ContactService.swift */,
 			);
 			name = Contact;
+			sourceTree = "<group>";
+		};
+		27AFC86A1F13AF490069C1CA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				27A204C71F00432300BE4846 /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		27AFC86B1F13AF570069C1CA /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Shared;
 			sourceTree = "<group>";
 		};
 		6B3F5EFF0102E81DB15B374C /* Frameworks */ = {

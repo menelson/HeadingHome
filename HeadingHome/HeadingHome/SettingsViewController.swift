@@ -13,6 +13,7 @@ import ContactsUI
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView?
+    var contactService: ContactService?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,7 @@ class SettingsViewController: UIViewController {
         tableView?.dataSource = self
         tableView?.delegate = self
         
-        _ = ContactService()
+        contactService = ContactService()
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,25 +81,10 @@ extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             // Default Contact
-            let picker = CNContactPickerViewController()
-            picker.delegate = self
-            picker.displayedPropertyKeys = [CNContactPhoneNumbersKey]
-            
-            
-            present(picker, animated: true, completion: nil)
-            
+            contactService?.showContactPicker()
         } else if indexPath.section == 1 {
             // Home Address
         }
     }
     
-}
-
-extension SettingsViewController: CNContactPickerDelegate {
-    func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty: CNContactProperty) {
-        let contact = contactProperty.contact
-        let phoneNumber = contactProperty.value as? CNPhoneNumber
-        
-        print("\(contact.givenName) - \(phoneNumber?.stringValue ?? "Empty")")
-    }
 }
