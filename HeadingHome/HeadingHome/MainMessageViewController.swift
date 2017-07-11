@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import MapKit
+import MNPermissionService
 
 class MainMessageViewController: UIViewController {
     
@@ -16,6 +17,7 @@ class MainMessageViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView?
     
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
+    var mapService: LocationManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +27,18 @@ class MainMessageViewController: UIViewController {
         
         initializeFetchedResultsController()
         
+        mapService = LocationManager.sharedInstance
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "UserLocationChange"),
+                                               object: nil,
+                                               queue: nil) {
+                                                _ in
+                                                
+                                                let current = self.mapService?.getCurrentLocation()
+                                                self.setUpMaps(location: current!)
+        }
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if(!(segue.identifier == "SettingsSegue" || segue.identifier == "NewMessageSegue")) {
@@ -62,6 +74,8 @@ class MainMessageViewController: UIViewController {
         }
     }
     
+    // Mark:- IBActions
+    
     func didTapSend(_ sender: Any) {
         print("send")
     }
@@ -70,6 +84,14 @@ class MainMessageViewController: UIViewController {
         performSegue(withIdentifier: "MessageDetailSegue", sender: sender)
     }
     
+    // Mark:- MapKit Setup
+    
+    func setUpMaps(location: CLLocationCoordinate2D) {
+        let regionRadius: CLLocationDistance = 1000
+        let region = MKCoordinateRegionMakeWithDistance(location, regionRadius * 2.0, regionRadius * 2.0)
+        
+        self.mapView?.setRegion(region, animated: true)
+    }
 }
 
 //MARK:- ActionCell
