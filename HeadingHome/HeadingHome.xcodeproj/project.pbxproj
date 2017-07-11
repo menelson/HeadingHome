@@ -23,6 +23,8 @@
 		27AFC86D1F13C3F00069C1CA /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFC86C1F13C3F00069C1CA /* Helper.swift */; };
 		27AFC86F1F13C8970069C1CA /* AppDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFC86E1F13C8970069C1CA /* AppDefaults.swift */; };
 		27AFC8721F13F12D0069C1CA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFC8711F13F12D0069C1CA /* LocationManager.swift */; };
+		27AFC8741F150DC80069C1CA /* AddressSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFC8731F150DC80069C1CA /* AddressSearchViewController.swift */; };
+		27AFC8761F15226B0069C1CA /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFC8751F15226B0069C1CA /* SearchResultsTableViewController.swift */; };
 		502424C70B6F2FAE5127F07C /* Pods_HeadingHomeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87578A5915C7252521E8A73 /* Pods_HeadingHomeTests.framework */; };
 		CA9CED88FFADED39B6C7828C /* Pods_HeadingHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AEB45E9F81CB22F82FE53F4 /* Pods_HeadingHome.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,8 @@
 		27AFC86C1F13C3F00069C1CA /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		27AFC86E1F13C8970069C1CA /* AppDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefaults.swift; sourceTree = "<group>"; };
 		27AFC8711F13F12D0069C1CA /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		27AFC8731F150DC80069C1CA /* AddressSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSearchViewController.swift; sourceTree = "<group>"; };
+		27AFC8751F15226B0069C1CA /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		81D41780B04D3D6D01D4462F /* Pods-HeadingHomeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeadingHomeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HeadingHomeTests/Pods-HeadingHomeTests.release.xcconfig"; sourceTree = "<group>"; };
 		845893F8B50F4B454BA55C02 /* Pods-HeadingHomeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeadingHomeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HeadingHomeTests/Pods-HeadingHomeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		99378523537C35C72F380454 /* Pods-HeadingHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HeadingHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HeadingHome/Pods-HeadingHome.debug.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				27AFC8711F13F12D0069C1CA /* LocationManager.swift */,
+				27AFC8731F150DC80069C1CA /* AddressSearchViewController.swift */,
+				27AFC8751F15226B0069C1CA /* SearchResultsTableViewController.swift */,
 			);
 			name = Location;
 			sourceTree = "<group>";
@@ -407,6 +413,8 @@
 				27A204BE1EF7FC1C00BE4846 /* MessageController.swift in Sources */,
 				27A204C81F00432300BE4846 /* SettingsViewController.swift in Sources */,
 				27A204C41EFD4A5A00BE4846 /* NewMessageViewController.swift in Sources */,
+				27AFC8761F15226B0069C1CA /* SearchResultsTableViewController.swift in Sources */,
+				27AFC8741F150DC80069C1CA /* AddressSearchViewController.swift in Sources */,
 				27A204CA1F017BC800BE4846 /* ContactService.swift in Sources */,
 				27A204BB1EF7FB1C00BE4846 /* Model.xcdatamodeld in Sources */,
 				27A204C21EF8177400BE4846 /* MainMessageViewController.swift in Sources */,

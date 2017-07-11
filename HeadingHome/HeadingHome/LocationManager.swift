@@ -37,7 +37,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLocation = manager.location?.coordinate
+        currentLocation = locations.first?.coordinate
         
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "UserLocationChange")))
     }

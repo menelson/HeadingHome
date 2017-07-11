@@ -97,6 +97,7 @@ extension SettingsViewController: UITableViewDelegate {
             contactService?.showContactPicker()
         } else if indexPath.section == 1 {
             // Home Address
+            self.performSegue(withIdentifier: "AddressSearchSegue", sender: nil)
         }
     }
     
