@@ -36,8 +36,13 @@ class AppDefaults {
     }
     
     func getCustom(key: String) -> NSData {
-        return defaults?.value(forKey: key) as! NSData
+        if let data = defaults?.value(forKey: key) as? NSData {
+            return data
+        }
+        
+        return NSData()
     }
+    
     
 }
 

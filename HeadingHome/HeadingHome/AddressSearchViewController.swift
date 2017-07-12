@@ -31,7 +31,13 @@ class AddressSearchViewController: UIViewController {
                                                 _ in
                                                 
                                                 self.firstLocation = self.mapService?.getCurrentLocation()
-                                                self.setUpMapView(location: self.firstLocation!)
+                                                if let home = self.mapService?.getHomeAddress() {
+                                                    self.setUpMapView(location: home.coordinate)
+                                                    self.mapView?.addAnnotation(home)
+                                                } else {
+                                                    self.setUpMapView(location: self.firstLocation!)
+                                                }
+                                                
                                                 self.mapService?.locationManager.stopUpdatingLocation()
                                                 
         }

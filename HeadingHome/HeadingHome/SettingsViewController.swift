@@ -25,8 +25,6 @@ class SettingsViewController: UIViewController {
         
         contactService = ContactService()
         mapService = LocationManager.sharedInstance
-        
-        print("Home Addr \(mapService?.getHomeAddress()?.title)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,11 +33,6 @@ class SettingsViewController: UIViewController {
         tableView?.reloadData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func didTapCancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
