@@ -73,6 +73,8 @@ extension AddressSearchViewController: HandleMapSearch {
     func dropPinZoomIn(placemark: MKPlacemark) {
         selectedAddress = placemark
         
+        mapService?.saveHomeAddress(address: placemark)
+        
         mapView?.removeAnnotations((mapView?.annotations)!)
         
         let annotation = MKPointAnnotation()

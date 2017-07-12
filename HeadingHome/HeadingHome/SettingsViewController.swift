@@ -9,11 +9,13 @@
 import UIKit
 import Contacts
 import ContactsUI
+import MapKit
 
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView?
     var contactService: ContactService?
+    var mapService: LocationManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,9 @@ class SettingsViewController: UIViewController {
         tableView?.delegate = self
         
         contactService = ContactService()
+        mapService = LocationManager.sharedInstance
+        
+        print("Home Addr \(mapService?.getHomeAddress()?.title)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,11 +84,13 @@ extension SettingsViewController: UITableViewDataSource {
                 }
             }
             
-        } else {
-            cell.textLabel?.text = "Test"
+        } else if indexPath.section == 1 {
+            if let address = mapService?.getHomeAddress() {
+                cell.textLabel?.text = address.title
+            } else {
+                cell.textLabel?.text = "Not Set"
+            }
         }
-        
-        
         
         return cell
     }

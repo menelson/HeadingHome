@@ -30,6 +30,20 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+        
+    }
+    
+    func getHomeAddress() -> MKPlacemark? {
+        var homeAddress: MKPlacemark? = nil
+        let address = AppDefaults.sharedInstance.getCustom(key: appKeys.home.rawValue)
+        
+        homeAddress = NSKeyedUnarchiver.unarchiveObject(with: address as Data) as? MKPlacemark
+        
+        return homeAddress
+    }
+    
+    func saveHomeAddress(address: MKPlacemark) {
+        AppDefaults.sharedInstance.setCustom(item: address, key: appKeys.home.rawValue)
     }
     
     func getCurrentLocation() -> CLLocationCoordinate2D {
