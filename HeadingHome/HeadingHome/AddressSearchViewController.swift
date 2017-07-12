@@ -17,6 +17,8 @@ class AddressSearchViewController: UIViewController {
     
     var mapService: LocationManager?
     var searchController: UISearchController? = nil
+    var selectedAddress: MKPlacemark? = nil
+    var firstLocation: CLLocationCoordinate2D? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +30,10 @@ class AddressSearchViewController: UIViewController {
                                                queue: nil) {
                                                 _ in
                                                 
-                                                let current = self.mapService?.getCurrentLocation()
-                                                self.setUpMapView(location: current!)
+                                                self.firstLocation = self.mapService?.getCurrentLocation()
+                                                self.setUpMapView(location: self.firstLocation!)
+                                                self.mapService?.locationManager.stopUpdatingLocation()
+                                                
         }
         
         let searchTable = storyboard?.instantiateViewController(withIdentifier: "SearchResultsTable") as? SearchResultsTableViewController
@@ -44,6 +48,9 @@ class AddressSearchViewController: UIViewController {
         searchController?.hidesNavigationBarDuringPresentation = false
         searchController?.dimsBackgroundDuringPresentation = true
         self.definesPresentationContext = true
+        
+        searchTable?.mapView = mapView
+        searchTable?.handleMapSearchDelegate = self
     }
 
     @IBAction func didTapCancel(_ sender: Any) {
@@ -55,9 +62,31 @@ class AddressSearchViewController: UIViewController {
     }
     
     func setUpMapView(location: CLLocationCoordinate2D) {
-        let regionRadius: CLLocationDistance = 1000
-        let region = MKCoordinateRegionMakeWithDistance(location, regionRadius * 2.0, regionRadius * 2.0)
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: location, span: span)
         
         self.mapView?.setRegion(region, animated: true)
+    }
+}
+
+extension AddressSearchViewController: HandleMapSearch {
+    func dropPinZoomIn(placemark: MKPlacemark) {
+        selectedAddress = placemark
+        
+        mapView?.removeAnnotations((mapView?.annotations)!)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        
+        if let city = placemark.locality,
+        let state = placemark.administrativeArea {
+            annotation.subtitle = String(format: "%@ %@", city, state)
+        }
+        
+        mapView?.addAnnotation(annotation)
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
+        mapView?.setRegion(region, animated: true)
     }
 }
