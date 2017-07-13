@@ -564,6 +564,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 99378523537C35C72F380454 /* Pods-HeadingHome.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2QKP24Y3HJ;
 				INFOPLIST_FILE = HeadingHome/Info.plist;
@@ -578,6 +579,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B81543FF8D5B9BA448FDC444 /* Pods-HeadingHome.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2QKP24Y3HJ;
 				INFOPLIST_FILE = HeadingHome/Info.plist;
