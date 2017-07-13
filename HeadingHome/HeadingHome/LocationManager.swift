@@ -61,17 +61,21 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             directions.source = MKMapItem.forCurrentLocation()
             directions.destination = MKMapItem(placemark: home)
             
-            let dir = MKDirections(request: directions)
-            dir.calculateETA(completionHandler: { (response, error) in
-                guard let reponse = response else {
-                    print("Error getting ETA :: \(error!)")
-                    return
-                }
-                let time: Int = Int(reponse.expectedTravelTime / 60)
-                print(time)
-                self.etaDelegate?.receivedETA(time: time)
-            })
+            calculateETA(withRequest: directions)
         }
+    }
+    
+    func calculateETA(withRequest directions: MKDirectionsRequest) {
+        let dir = MKDirections(request: directions)
+        dir.calculateETA(completionHandler: { (response, error) in
+            guard let reponse = response else {
+                print("Error getting ETA :: \(error!)")
+                return
+            }
+            let time: Int = Int(reponse.expectedTravelTime / 60)
+            print(time)
+            self.etaDelegate?.receivedETA(time: time)
+        })
     }
     
     // Location Manager Delegate
