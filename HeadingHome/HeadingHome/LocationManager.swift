@@ -11,6 +11,10 @@ import MNPermissionService
 import CoreLocation
 import MapKit
 
+protocol ETADelegate: class {
+    func receivedETA(time: Int)
+}
+
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
     static let sharedInstance = LocationManager()
@@ -18,6 +22,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     var service: MNPermissionService?
     var locationManager = CLLocationManager()
     var currentLocation: CLLocationCoordinate2D? = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    weak var etaDelegate: ETADelegate?
     
     fileprivate override init() {
         super.init()
@@ -50,10 +55,32 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         return currentLocation!
     }
     
+    func getEstimatedTimeHome() {
+        if let home = getHomeAddress() {
+            let directions = MKDirectionsRequest()
+            directions.source = MKMapItem.forCurrentLocation()
+            directions.destination = MKMapItem(placemark: home)
+            
+            let dir = MKDirections(request: directions)
+            dir.calculateETA(completionHandler: { (response, error) in
+                guard let reponse = response else {
+                    print("Error getting ETA :: \(error!)")
+                    return
+                }
+                let time: Int = Int(reponse.expectedTravelTime / 60)
+                print(time)
+                self.etaDelegate?.receivedETA(time: time)
+            })
+        }
+    }
+    
+    // Location Manager Delegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations.first?.coordinate
         
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "UserLocationChange")))
     }
+    
+    
     
 }

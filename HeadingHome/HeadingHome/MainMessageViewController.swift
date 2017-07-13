@@ -37,6 +37,8 @@ class MainMessageViewController: UIViewController {
                                                 let current = self.mapService?.getCurrentLocation()
                                                 self.setUpMaps(location: current!)
         }
+        
+        mapService?.etaDelegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -77,7 +79,7 @@ class MainMessageViewController: UIViewController {
     // Mark:- IBActions
     
     func didTapSend(_ sender: Any) {
-        print("send")
+        mapService?.getEstimatedTimeHome()
     }
     
     func didTapDetail(_ sender: Any) {
@@ -215,5 +217,11 @@ extension MainMessageViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView?.endUpdates()
+    }
+}
+
+extension MainMessageViewController: ETADelegate {
+    func receivedETA(time: Int) {
+        print("I'll be home in \(time) mins")
     }
 }
