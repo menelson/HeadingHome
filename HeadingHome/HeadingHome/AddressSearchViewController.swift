@@ -25,6 +25,52 @@ class AddressSearchViewController: UIViewController {
 
         mapService = LocationManager.sharedInstance
         
+        addNotification()
+        
+        let searchTable = setUpResultsTable()
+        setupSearchController(withViewController: searchTable)
+        
+    }
+
+    @IBAction func didTapCancel(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func didTapDone(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func setupSearchController(withViewController searchTable: SearchResultsTableViewController) {
+        searchController = UISearchController(searchResultsController: searchTable)
+        searchController?.searchResultsUpdater = searchTable
+        
+        let searchBar = searchController?.searchBar
+        searchBar?.sizeToFit()
+        searchBar?.placeholder = "Address Search"
+        navigationItem.titleView = searchController?.searchBar
+        
+        searchController?.hidesNavigationBarDuringPresentation = false
+        searchController?.dimsBackgroundDuringPresentation = true
+        self.definesPresentationContext = true
+    }
+    
+    func setUpMapView(location: CLLocationCoordinate2D) {
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: location, span: span)
+        
+        self.mapView?.setRegion(region, animated: true)
+    }
+    
+    func setUpResultsTable() -> SearchResultsTableViewController {
+        let searchTable = storyboard?.instantiateViewController(withIdentifier: "SearchResultsTable") as? SearchResultsTableViewController
+        
+        searchTable?.mapView = mapView
+        searchTable?.handleMapSearchDelegate = self
+        
+        return searchTable!
+    }
+    
+    func addNotification() {
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "UserLocationChange"),
                                                object: nil,
                                                queue: nil) {
@@ -41,37 +87,6 @@ class AddressSearchViewController: UIViewController {
                                                 self.mapService?.locationManager.stopUpdatingLocation()
                                                 
         }
-        
-        let searchTable = storyboard?.instantiateViewController(withIdentifier: "SearchResultsTable") as? SearchResultsTableViewController
-        searchController = UISearchController(searchResultsController: searchTable)
-        searchController?.searchResultsUpdater = searchTable
-
-        let searchBar = searchController?.searchBar
-        searchBar?.sizeToFit()
-        searchBar?.placeholder = "Address Search"
-        navigationItem.titleView = searchController?.searchBar
-        
-        searchController?.hidesNavigationBarDuringPresentation = false
-        searchController?.dimsBackgroundDuringPresentation = true
-        self.definesPresentationContext = true
-        
-        searchTable?.mapView = mapView
-        searchTable?.handleMapSearchDelegate = self
-    }
-
-    @IBAction func didTapCancel(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func didTapDone(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func setUpMapView(location: CLLocationCoordinate2D) {
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let region = MKCoordinateRegion(center: location, span: span)
-        
-        self.mapView?.setRegion(region, animated: true)
     }
 }
 
