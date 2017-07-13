@@ -18,6 +18,7 @@ class MainMessageViewController: UIViewController {
     
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     var mapService: LocationManager?
+    var selectedMessage: String? = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +80,11 @@ class MainMessageViewController: UIViewController {
     // Mark:- IBActions
     
     func didTapSend(_ sender: Any) {
+        let idx = NSIndexPath(row: (sender as AnyObject).tag, section: 0)
+        let message = fetchedResultsController?.object(at: idx as IndexPath) as! Message
+        //print(message.title)
+        selectedMessage = message.body
+        
         mapService?.getEstimatedTimeHome()
     }
     
@@ -222,6 +228,8 @@ extension MainMessageViewController: NSFetchedResultsControllerDelegate {
 
 extension MainMessageViewController: ETADelegate {
     func receivedETA(time: Int) {
-        print("I'll be home in \(time) mins")
+        if let message = selectedMessage {
+            print("\(message) I'll be home in \(time) mins")
+        }
     }
 }
