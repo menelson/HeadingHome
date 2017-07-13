@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import MapKit
 import MNPermissionService
+import MessageUI
 
 class MainMessageViewController: UIViewController {
     
@@ -229,7 +230,22 @@ extension MainMessageViewController: NSFetchedResultsControllerDelegate {
 extension MainMessageViewController: ETADelegate {
     func receivedETA(time: Int) {
         if let message = selectedMessage {
-            print("\(message) I'll be home in \(time) mins")
+            let contact = AppDefaults.sharedInstance.getString(key: appKeys.contactNumber.rawValue)
+            
+            let controller = MFMessageComposeViewController()
+            if MFMessageComposeViewController.canSendText() {
+                controller.body = "\(message) I'll be home in \(time) mins."
+                controller.recipients = [contact]
+                controller.messageComposeDelegate = self
+                self.present(controller, animated: true, completion: nil)
+            }
         }
+    }
+}
+
+extension MainMessageViewController: MFMessageComposeViewControllerDelegate {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        print("Finished")
+        controller.dismiss(animated: true, completion: nil)
     }
 }
