@@ -40,6 +40,29 @@ class SettingsViewController: UIViewController {
     @IBAction func didTapDone(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func configureContactCell() -> String {
+        var title = ""
+        if !(CNContactStore.authorizationStatus(for: .contacts) == .authorized) {
+            title = "Not Authorized"
+        } else {
+            let contact = contactService?.getContactDefaults()
+            if contact?.0 == "" {
+                title = "Not Set"
+            } else {
+                title = (contact?.0)!
+            }
+        }
+        return title
+    }
+    
+    func configureAddressCell() -> String {
+        
+        if let address = mapService?.getHomeAddress() {
+            return address.title!
+        }
+        return "Not Set"
+    }
 }
 
 extension SettingsViewController: UITableViewDataSource {
@@ -66,23 +89,9 @@ extension SettingsViewController: UITableViewDataSource {
         }
         
         if indexPath.section == 0 {
-            if !(CNContactStore.authorizationStatus(for: .contacts) == .authorized) {
-                cell.textLabel?.text = "Not Authorized"
-            } else {
-                let contact = contactService?.getContactDefaults()
-                if contact?.0 == "" {
-                    cell.textLabel?.text = "Not Set"
-                } else {
-                    cell.textLabel?.text = contact?.0
-                }
-            }
-            
+            cell.textLabel?.text = configureContactCell()
         } else if indexPath.section == 1 {
-            if let address = mapService?.getHomeAddress() {
-                cell.textLabel?.text = address.title
-            } else {
-                cell.textLabel?.text = "Not Set"
-            }
+            cell.textLabel?.text = configureAddressCell()
         }
         
         return cell
