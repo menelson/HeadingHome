@@ -8,12 +8,18 @@
 
 import UIKit
 import CoreData
+import MapKit
+import MNPermissionService
+import MessageUI
 
 class MainMessageViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var mapView: MKMapView?
     
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
+    var mapService: LocationManager?
+    var selectedMessage: String? = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +28,19 @@ class MainMessageViewController: UIViewController {
         tableView?.dataSource = self
         
         initializeFetchedResultsController()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
         
+        mapService = LocationManager.sharedInstance
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: "UserLocationChange"),
+                                               object: nil,
+                                               queue: nil) {
+                                                _ in
+                                                
+                                                let current = self.mapService?.getCurrentLocation()
+                                                self.setUpMaps(location: current!)
+        }
+        
+        mapService?.etaDelegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -64,12 +78,28 @@ class MainMessageViewController: UIViewController {
         }
     }
     
+    // Mark:- IBActions
+    
     func didTapSend(_ sender: Any) {
-        print("send")
+        let idx = NSIndexPath(row: (sender as AnyObject).tag, section: 0)
+        let message = fetchedResultsController?.object(at: idx as IndexPath) as! Message
+        //print(message.title)
+        selectedMessage = message.body
+        
+        mapService?.getEstimatedTimeHome()
     }
     
     func didTapDetail(_ sender: Any) {
         performSegue(withIdentifier: "MessageDetailSegue", sender: sender)
+    }
+    
+    // Mark:- MapKit Setup
+    
+    func setUpMaps(location: CLLocationCoordinate2D) {
+        let regionRadius: CLLocationDistance = 1000
+        let region = MKCoordinateRegionMakeWithDistance(location, regionRadius * 2.0, regionRadius * 2.0)
+        
+        self.mapView?.setRegion(region, animated: true)
     }
 }
 
@@ -194,5 +224,28 @@ extension MainMessageViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView?.endUpdates()
+    }
+}
+
+extension MainMessageViewController: ETADelegate {
+    func receivedETA(time: Int) {
+        if let message = selectedMessage {
+            let contact = AppDefaults.sharedInstance.getString(key: appKeys.contactNumber.rawValue)
+            
+            let controller = MFMessageComposeViewController()
+            if MFMessageComposeViewController.canSendText() {
+                controller.body = "\(message) I'll be home in \(time) mins."
+                controller.recipients = [contact]
+                controller.messageComposeDelegate = self
+                self.present(controller, animated: true, completion: nil)
+            }
+        }
+    }
+}
+
+extension MainMessageViewController: MFMessageComposeViewControllerDelegate {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        print("Finished")
+        controller.dismiss(animated: true, completion: nil)
     }
 }

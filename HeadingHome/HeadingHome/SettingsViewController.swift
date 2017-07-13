@@ -9,11 +9,13 @@
 import UIKit
 import Contacts
 import ContactsUI
+import MapKit
 
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView?
     var contactService: ContactService?
+    var mapService: LocationManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,7 @@ class SettingsViewController: UIViewController {
         tableView?.delegate = self
         
         contactService = ContactService()
+        mapService = LocationManager.sharedInstance
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,17 +33,35 @@ class SettingsViewController: UIViewController {
         tableView?.reloadData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func didTapCancel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapDone(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func configureContactCell() -> String {
+        var title = ""
+        if !(CNContactStore.authorizationStatus(for: .contacts) == .authorized) {
+            title = "Not Authorized"
+        } else {
+            let contact = contactService?.getContactDefaults()
+            if contact?.0 == "" {
+                title = "Not Set"
+            } else {
+                title = (contact?.0)!
+            }
+        }
+        return title
+    }
+    
+    func configureAddressCell() -> String {
+        
+        if let address = mapService?.getHomeAddress() {
+            return address.title!
+        }
+        return "Not Set"
     }
 }
 
@@ -68,22 +89,10 @@ extension SettingsViewController: UITableViewDataSource {
         }
         
         if indexPath.section == 0 {
-            if !(CNContactStore.authorizationStatus(for: .contacts) == .authorized) {
-                cell.textLabel?.text = "Not Authorized"
-            } else {
-                let contact = contactService?.getContactDefaults()
-                if contact?.0 == "" {
-                    cell.textLabel?.text = "Not Set"
-                } else {
-                    cell.textLabel?.text = contact?.0
-                }
-            }
-            
-        } else {
-            cell.textLabel?.text = "Test"
+            cell.textLabel?.text = configureContactCell()
+        } else if indexPath.section == 1 {
+            cell.textLabel?.text = configureAddressCell()
         }
-        
-        
         
         return cell
     }
@@ -97,6 +106,7 @@ extension SettingsViewController: UITableViewDelegate {
             contactService?.showContactPicker()
         } else if indexPath.section == 1 {
             // Home Address
+            self.performSegue(withIdentifier: "AddressSearchSegue", sender: nil)
         }
     }
     

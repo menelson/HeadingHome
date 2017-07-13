@@ -12,10 +12,11 @@ class AppDefaults {
     
     static let sharedInstance = AppDefaults()
     
-    fileprivate var defaults: UserDefaults?
+    var defaults: UserDefaults?
     
     fileprivate init() {
         defaults = UserDefaults.standard
+        defaults?.synchronize()
     }
     
     func setString(item: String, key: String) {
@@ -29,6 +30,20 @@ class AppDefaults {
         
         return value
     }
+    
+    func setCustom(item: Any, key: String) {
+        defaults?.set(NSKeyedArchiver.archivedData(withRootObject: item), forKey: key)
+    }
+    
+    func getCustom(key: String) -> NSData {
+        if let data = defaults?.value(forKey: key) as? NSData {
+            return data
+        }
+        
+        return NSData()
+    }
+    
+    
 }
 
 public enum appKeys: String {
