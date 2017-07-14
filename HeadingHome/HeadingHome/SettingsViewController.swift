@@ -33,10 +33,6 @@ class SettingsViewController: UIViewController {
         tableView?.reloadData()
     }
 
-    @IBAction func didTapCancel(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func didTapDone(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
