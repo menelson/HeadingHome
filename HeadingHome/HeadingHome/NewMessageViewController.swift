@@ -17,6 +17,8 @@ class NewMessageViewController: UIViewController {
         super.viewDidLoad()
         
         bodyTextView?.layer.borderWidth = 1
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
 
     override func didReceiveMemoryWarning() {
