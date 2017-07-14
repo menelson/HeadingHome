@@ -24,6 +24,8 @@ class MessageDetailViewController: UIViewController {
             titleTextField?.text = title
             bodyTextView?.text = body
         }
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
     override func didReceiveMemoryWarning() {
