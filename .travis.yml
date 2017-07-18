@@ -2,3 +2,5 @@ language: swift
 osx_image: xcode8.3
 xcode_workspace: HeadingHome/HeadingHome.workspace
 xcode_scheme:  HeadingHomeTests
+after_success: 
+ - bash <(curl -s https://codecov.io/bash)
