@@ -18,12 +18,14 @@ class MessageControllerUnitTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        controller = MessageController()
+        controller = MessageController.sharedInstance
         controller?.context = setUpInMemoryCoreDateContext()
     }
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        controller = nil
+        
         super.tearDown()
     }
     
@@ -51,11 +53,12 @@ class MessageControllerUnitTests: XCTestCase {
         let testController: MessageController?
         
         // When
-        testController = MessageController()
+        testController = MessageController.sharedInstance
         
         // Then
         XCTAssertNotNil(testController)
         XCTAssertNotNil(testController?.context!)
+        
     }
     
     func testControllerCreate() {
